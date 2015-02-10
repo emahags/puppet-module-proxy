@@ -7,4 +7,4 @@ summary 'put a summary here'
 description 'put a description here'
 project_page 'https://github.com/emahags/puppet-module-proxy'
 
-dependency 'puppetlabs/stdlib', '>= 3.2.0'
+dependency 'puppetlabs/stdlib', '>= 4.2.0'

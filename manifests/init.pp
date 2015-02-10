@@ -24,21 +24,17 @@ class proxy (
   $proxy_profile_csh_owner = 'root',
   $proxy_profile_csh_group = 'root',
 ) {
-  case type($proxy_enabled) {
-    'string': {
-      validate_re($proxy_enabled, '^(yes|no)$', "proxy::proxy_enabled may be either 'yes' or 'no' and is set to <${proxy_enabled}>.")
-      $proxy_enabled_real = $proxy_enabled
+  if is_string($proxy_enabled) {
+    validate_re($proxy_enabled, '^(yes|no)$', "proxy::proxy_enabled may be either 'yes' or 'no' and is set to <${proxy_enabled}>.")
+    $proxy_enabled_real = $proxy_enabled
+  } elsif is_bool($proxy_enabled) {
+    if $proxy_enabled == true {
+      $proxy_enabled_real = 'yes'
+    } else {
+      $proxy_enabled_real = 'no'
     }
-    'boolean': {
-      if $proxy_enabled == true {
-        $proxy_enabled_real = 'yes'
-      } else {
-        $proxy_enabled_real = 'no'
-      }
-    }
-    default: {
-      fail('proxy::proxy_enabled type must be string or bool')
-    }
+  } else {
+    fail('proxy::proxy_enabled type must be string or bool')
   }
   validate_re($proxy_profile_sh_ensure, '^(file|absent)$', "proxy::proxy_profile_sh_ensure may be either 'file' or 'absent' and is set to <${proxy_profile_sh_ensure}>.")
   validate_re($proxy_profile_csh_ensure, '^(file|absent)$', "proxy::proxy_profile_csh_ensure may be either 'file' or 'absent' and is set to <${proxy_profile_csh_ensure}>.")
