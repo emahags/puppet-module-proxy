@@ -58,30 +58,30 @@ class proxy (
     'Suse': {
       validate_absolute_path($proxy_sysconfig_path)
       file { 'proxy_sysconfig':
-        path => $proxy_sysconfig_path,
-        mode => $proxy_sysconfig_mode,
-        owner => $proxy_sysconfig_owner,
-        group => $proxy_sysconfig_group,
+        path    => $proxy_sysconfig_path,
+        mode    => $proxy_sysconfig_mode,
+        owner   => $proxy_sysconfig_owner,
+        group   => $proxy_sysconfig_group,
         content => template('proxy/proxy_sysconfig.erb'),
       }
     }
     'RedHat': {
       validate_absolute_path($proxy_profile_sh_path)
       file { 'proxy_profile.sh':
-        ensure => $proxy_profile_sh_ensure,
-        path => $proxy_profile_sh_path,
-        mode => $proxy_profile_sh_mode,
-        owner => $proxy_profile_sh_owner,
-        group => $proxy_profile_sh_group,
+        ensure  => $proxy_profile_sh_ensure,
+        path    => $proxy_profile_sh_path,
+        mode    => $proxy_profile_sh_mode,
+        owner   => $proxy_profile_sh_owner,
+        group   => $proxy_profile_sh_group,
         content => template('proxy/proxy_profile.sh.erb'),
       }
       validate_absolute_path($proxy_profile_sh_path)
       file { 'proxy_profile.csh':
-        ensure => $proxy_profile_csh_ensure,
-        path => $proxy_profile_csh_path,
-        mode => $proxy_profile_csh_mode,
-        owner => $proxy_profile_csh_owner,
-        group => $proxy_profile_csh_group,
+        ensure  => $proxy_profile_csh_ensure,
+        path    => $proxy_profile_csh_path,
+        mode    => $proxy_profile_csh_mode,
+        owner   => $proxy_profile_csh_owner,
+        group   => $proxy_profile_csh_group,
         content => template('proxy/proxy_profile.csh.erb'),
       }
     }
